@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" class="preload">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>things-alive</title>
+
+    <style> html.preload body { display: none}</style>
+
+    <!-- <link rel="stylesheet" href="style.css"> -->
+  </head>
+  <body>
+
+    <!--Landing Page of Sorts-->
+    <div id="landing" class = "hidden">
+      <h1> THINGS ALIVE </h1>
+      <button id="enterBtn">Enter</button>
+      <div id="loader" class= "hidden"> Loading...</div>
+    </div>
+
+    <!--Main App-->
+    <div id="app" class="hidden">
+      <div>
+        <h1>things-alive</h1> <!--replace w/logo-->
+      </div>
+
+      <section id="workspace-container">
+        <div id="toolbar">
+          <!--tools go here-->
+        </div>
+        <canvas id= "canvas"></canvas>
+      </section>
+
+
+    </div>
+
+    
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
