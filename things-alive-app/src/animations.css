@@ -1,0 +1,7 @@
+.door-panels.open .panel.left{
+    transform: translateX(-70%);
+}
+
+.door-panels.open .panel.right{
+    transform: translateX(70%);
+}

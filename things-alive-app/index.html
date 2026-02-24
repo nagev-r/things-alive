@@ -3,38 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>things-alive</title>
-
-    <style> html.preload body { display: none}</style>
-
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="./src/main-style.css">
+    <link rel="stylesheet" href="./src/animations.css">
   </head>
   <body>
 
+    <!--transition panels, might rename to panels idk rn-->
+    <div class="door-panels">
+          <div class="panel left"></div>
+          <div class="panel right"></div>
+    </div>
+    
     <!--Landing Page of Sorts-->
-    <div id="landing" class = "hidden">
-      <h1> THINGS ALIVE </h1>
-      <button id="enterBtn">Enter</button>
-      <div id="loader" class= "hidden"> Loading...</div>
+    <div id="landing" class="screen is-active">
+      <div class="landing-container">
+        <h1> things-alive </h1>  <!--change to logo-->
+        <button id="enterBtn">E</button>
+        <div id="loader" class= "hidden"> Loading...</div>
+      </div>
     </div>
 
     <!--Main App-->
-    <div id="app" class="hidden">
-      <div>
-        <h1>things-alive</h1> <!--replace w/logo-->
+    <div id="app" class="screen">
+      <div class ="app-shell">
+        <!-- replace w/logo -->
+          <h1>things-alive</h1> 
+
+        <section id="workspace-container">
+          <div id="toolbar">
+            <!--tools go here-->
+          </div>
+          <canvas id= "canvas"></canvas>
+        </section>
+
       </div>
-
-      <section id="workspace-container">
-        <div id="toolbar">
-          <!--tools go here-->
-        </div>
-        <canvas id= "canvas"></canvas>
-      </section>
-
-
     </div>
 
-    
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
