@@ -138,7 +138,7 @@ button:focus-visible {
 }
 
 
-#canvas{
+#canvasLayout{
   display: block;
   border: 1px solid black;
 

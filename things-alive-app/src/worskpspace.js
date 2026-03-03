@@ -1,17 +1,21 @@
 
-export function initCanvas() {
-    const canvas = document.getElementById("canvas");
+
+export function initWorkspace(){
+    const canvas = document.getElementById("canvasLayout");
     const ctx = canvas.getContext("2d");
 
     //setting pixel size
     canvas.width = 400;
     canvas.height = 400;
+
+
     ctx.lineWidth = 4;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     ctx.strokeStyle = "black";
     ctx.fillStyle = "white";
     let drawing = false;
+
 
     //start drawing
     canvas.addEventListener("mousedown", (e) => {
@@ -35,5 +39,4 @@ export function initCanvas() {
      canvas.addEventListener( "mouseleave", (e) => {
         drawing = false;
     })
-
 }
