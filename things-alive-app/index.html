@@ -10,32 +10,29 @@
   </head>
   <body>
 
-    <!--transition panels, might rename to panels idk rn-->
-    <div class="door-panels">
-          <div class="panel left"></div>
-          <div class="panel right"></div>
-    </div>
-    
-    <!--Landing Page of Sorts-->
-    <div id="landing" class="screen is-active">
-      <div class="landing-container">
-        <h1> things-alive </h1>  <!--change to logo-->
-        <button id="enterBtn">E</button>
-        <div id="loader" class= "hidden"> Loading...</div>
-      </div>
-    </div>
-
     <!--Main App-->
-    <div id="app" class="screen">
+    <div id="app">
       <div class ="app-shell">
+        
         <!-- replace w/logo -->
-          <h1>things-alive</h1> 
-
+         <div class = "header">
+          <h1>things-alive</h1>
+        </div>
+        <nav class="navigation"></nav>
         <section id="workspace-container">
-          <div id="toolbar">
-            <!--tools go here-->
+        
+          <canvas id= "canvasLayout"></canvas>
+          <div id="toolbar-container">
+            <div class="toolbar">
+              <button id="pen" class ="tool" data-tool = "pen">1</button>
+              <button id="brush" class ="tool" data-tool = "brush">2</button>
+              <button id="marker" class ="tool" data-tool = "marker">3</button>
+              <button id="eraser" class ="tool" data-tool = "eraser">4</button>
+              <!--tools go here-->
+            </div>
+            
           </div>
-          <canvas id= "canvas"></canvas>
+
         </section>
 
       </div>
