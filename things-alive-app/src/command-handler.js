@@ -1,5 +1,7 @@
+import { beginDrawing, continueDrawing } from "./renderer";
 
-export function inputHandler(user, canvas, ctx) {
+//need to add undo, redo, and a clear
+export function commandHandler(user, canvas, ctx) {
     let drawing = false;
 
     canvas.addEventListener("mousedown", (e) => {
@@ -12,13 +14,16 @@ export function inputHandler(user, canvas, ctx) {
             points: []
         }
 
+        
         user.setCurrentStroke(newStroke);
         user.addPoints({x: e.offsetX, y: e.offsetY})
-         
-        ctx.strokeStyle = user.getColor();
-        ctx.lineWidth = user.getBrushSize();
-        ctx.beginPath();
-        ctx.moveTo(e.offsetX, e.offsetY);
+
+        beginDrawing(user.getCurrentStroke(), ctx);
+
+        // ctx.strokeStyle = user.getColor();
+        // ctx.lineWidth = user.getBrushSize();
+        // ctx.beginPath();
+        // ctx.moveTo(e.offsetX, e.offsetY);
     })
 
     canvas.addEventListener("mousemove", (e) =>{
@@ -26,9 +31,11 @@ export function inputHandler(user, canvas, ctx) {
 
         user.addPoints({ x: e.offsetX, y: e.offsetY });
 
+        continueDrawing(user.getPoints(),ctx);
+
         // temp draw
-        ctx.lineTo(e.offsetX, e.offsetY);
-        ctx.stroke();
+        // ctx.lineTo(e.offsetX, e.offsetY);
+        // ctx.stroke();
     })
 
     //stop drawing

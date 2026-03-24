@@ -1,4 +1,4 @@
-import {inputHandler} from "./input-handler.js";
+import {commandHandler} from "./command-handler.js";
 import {User} from "./user.js";
 import {createCanvas} from "./canvas.js"
 import {initToolbar} from "./toolbar.js";
@@ -9,7 +9,7 @@ export function setupWorkspace(){
     
     const {canvas, ctx} = createCanvas(); 
     initToolbar(user);
-    inputHandler(user, canvas, ctx); //default canvas is then sent for input usage
+    commandHandler(user, canvas, ctx); //default canvas is then sent for input usage
 
 }
 

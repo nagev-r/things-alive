@@ -9,7 +9,7 @@ export class User {
             strokes: []            
          } 
 
-        this.actionState = { //an object of the default state of drawing starts on the brush tool
+        this.actionState = { //an object of the default state of user, starts on the pen tool
             tool: "pen",
             currentColor: "#000",
             brushSize: 2,
@@ -17,6 +17,7 @@ export class User {
 
     }
 
+    
     setCurrentStroke(currentStroke){
         this.drawingHistory.currentStroke = currentStroke;
     }
@@ -28,6 +29,9 @@ export class User {
     addPoints(points){ //adds the coordinate points within the current stroke object (can be multiple)
         this.drawingHistory.currentStroke.points.push(points);
     }
+    getPoints(){
+        return this.drawingHistory.currentStroke.points.pop();
+    }
 
 
     addStrokes(currentStroke){
@@ -36,33 +40,30 @@ export class User {
     getStrokes(){
         return this.drawingHistory.strokes;
     }
-
-
-
     undoStroke(){
         this.drawingHistory.strokes.pop();
     }
 
+
     setColor(currentColor){
         this.actionState.currentColor = currentColor;
     }
-
-    setBrushSize(brushSize){
-        this.actionState.brushSize = brushSize;
-    }
-
-    setTool(tool){
-        this.actionState.tool = tool;
-    }
-
     getColor(){
         return this.actionState.currentColor;
     }
 
+
+    setBrushSize(brushSize){
+        this.actionState.brushSize = brushSize;
+    }
     getBrushSize(){
         return this.actionState.brushSize;
     }
 
+    
+    setTool(tool){
+        this.actionState.tool = tool;
+    }
     getTool(){
         return this.actionState.tool;
     }
