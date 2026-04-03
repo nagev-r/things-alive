@@ -4,8 +4,8 @@ import {createCanvas} from "./canvas.js"
 import {initToolbar} from "./toolbar.js";
 
 export function setupWorkspace(){
-    
-    const user = new User(1); //new user on new workspace setup, future needs random gen
+    const userId = crypto.randomUUID();
+    const user = new User(userId); //new user on new workspace setup, future needs random gen
     
     const {canvas, ctx} = createCanvas(); 
     initToolbar(user);

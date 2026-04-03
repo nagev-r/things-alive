@@ -19,6 +19,9 @@ export function commandHandler(user, canvas, ctx) {
         user.addPoints({x: e.offsetX, y: e.offsetY})
 
         beginDrawing(user.getCurrentStroke(), ctx);
+        window.dispatchEvent(new CustomEvent("startStroke", {
+            detail: user.getCurrentStroke()
+        }))
 
         // ctx.strokeStyle = user.getColor();
         // ctx.lineWidth = user.getBrushSize();
@@ -30,8 +33,11 @@ export function commandHandler(user, canvas, ctx) {
         if(!drawing) return;
 
         user.addPoints({ x: e.offsetX, y: e.offsetY });
-
         continueDrawing(user.getPoints(),ctx);
+
+        window.dispatchEvent(new CustomeEvent("updateStroke", {
+            detail: {x: e.offsetX, y: e.offsetY}
+        }))
 
         // temp draw
         // ctx.lineTo(e.offsetX, e.offsetY);
@@ -45,8 +51,9 @@ export function commandHandler(user, canvas, ctx) {
 
         user.addStrokes(user.getCurrentStroke());
         user.setCurrentStroke(null);
-
-       console.log(JSON.stringify(user.getStrokes(), null, 2));
+        
+        window.dispatchEvent(new CustomeEvent("endStroke"));
+       
 
     })
      canvas.addEventListener( "mouseleave", (e) => {
