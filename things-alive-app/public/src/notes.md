@@ -12,3 +12,7 @@ Once this concept was grasped in a basic implementation I then had to really thi
 As the user draws, more and more points will accure. By tracking these points in an array we can basically replay these steps to recreate the drawing sequntially. This is the data that will be sent over websockets and update other users in real time.
 
 For now, I've reasoned that storing this info in the User class would be a decent way to keep each state of the application contained with its own state. I will go over the other structures and data handling methods I am using later!
+
+
+*4/5/26*
+

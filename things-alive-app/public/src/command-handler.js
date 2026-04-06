@@ -1,4 +1,4 @@
-import { beginDrawing, continueDrawing } from "./renderer";
+import { beginDrawing, continueDrawing } from "./renderer.js";
 
 //need to add undo, redo, and a clear
 export function commandHandler(user, canvas, ctx) {
@@ -17,12 +17,12 @@ export function commandHandler(user, canvas, ctx) {
         
         user.setCurrentStroke(newStroke);
         user.addPoints({x: e.offsetX, y: e.offsetY})
-
         beginDrawing(user.getCurrentStroke(), ctx);
+
         window.dispatchEvent(new CustomEvent("startStroke", {
             detail: user.getCurrentStroke()
         }))
-
+        console.log("1: dispatched startStroke", user.getCurrentStroke());
         // ctx.strokeStyle = user.getColor();
         // ctx.lineWidth = user.getBrushSize();
         // ctx.beginPath();
@@ -35,9 +35,10 @@ export function commandHandler(user, canvas, ctx) {
         user.addPoints({ x: e.offsetX, y: e.offsetY });
         continueDrawing(user.getPoints(),ctx);
 
-        window.dispatchEvent(new CustomeEvent("updateStroke", {
+        window.dispatchEvent(new CustomEvent("updateStroke", {
             detail: {x: e.offsetX, y: e.offsetY}
         }))
+        
 
         // temp draw
         // ctx.lineTo(e.offsetX, e.offsetY);
@@ -52,7 +53,7 @@ export function commandHandler(user, canvas, ctx) {
         user.addStrokes(user.getCurrentStroke());
         user.setCurrentStroke(null);
         
-        window.dispatchEvent(new CustomeEvent("endStroke"));
+        window.dispatchEvent(new CustomEvent("endStroke"));
        
 
     })
@@ -62,6 +63,8 @@ export function commandHandler(user, canvas, ctx) {
 
         user.addStrokes(user.getCurrentStroke());
         user.setCurrentStroke(null);
+
+        window.dispatchEvent(new CustomEvent("endStroke"));
     })
 
 }
