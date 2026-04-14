@@ -15,26 +15,31 @@
       <div class ="app-shell">
         
         <!-- replace w/logo -->
-         <div class = "header">
-          <!--Future nav herre for other pages-->
-        </div>
-        <nav class="navigation"></nav>
-        <section id="workspace-container">
-        
-          <canvas id= "canvasLayout"></canvas>
-          <div id="toolbar-container">
-            <div class="toolbar">
-              <button id="pen" class ="tool" data-tool = "pen">1</button>
-              <button id="brush" class ="tool" data-tool = "brush">2</button>
-              <button id="marker" class ="tool" data-tool = "marker">3</button>
-              <button id="eraser" class ="tool" data-tool = "eraser">4</button>
-              <!--tools go here-->
-            </div>
-            
+
+        <nav class="nav">
+          <div class = "nav-links">
+              <a> Home </a>
+              <a> About </a>
+              <a> More </a>
           </div>
+        </nav>
 
+        <section id="workspace-container">
+          
+            <canvas id= "canvasLayout"></canvas>
+            
+              <div class="toolbar">
+                <button id="pen" class ="tool" data-tool = "pen">1</button>
+                <button id="brush" class ="tool" data-tool = "brush">2</button>
+                <button id="marker" class ="tool" data-tool = "marker">3</button>
+                <button id="eraser" class ="tool" data-tool = "eraser">4</button>
+                <!--tools go here-->
+              </div>
+            
+          
+          
         </section>
-
+        <!-- <div class = "footer"></div> -->
       </div>
     </div>
     <script src ="/socket.io/socket.io.js"></script>

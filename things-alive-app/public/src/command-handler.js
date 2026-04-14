@@ -1,42 +1,43 @@
 import { beginDrawing, continueDrawing } from "./renderer.js";
 
+
 //need to add undo, redo, and a clear
 export function commandHandler(user, canvas, ctx) {
+    console.log("command handler called");
     let drawing = false;
-
     canvas.addEventListener("mousedown", (e) => {
         drawing = true;
 
         const newStroke = {
+            userId: user.getUserId(),
             tool: user.getTool(),
             currentColor: user.getColor(),
             brushSize: user.getBrushSize(),
             points: []
         }
-
+        const {x, y} = getMouseCoords(e);
         
         user.setCurrentStroke(newStroke);
-        user.addPoints({x: e.offsetX, y: e.offsetY})
+        user.addPoints({x: x, y: y})
         beginDrawing(user.getCurrentStroke(), ctx);
 
         window.dispatchEvent(new CustomEvent("startStroke", {
             detail: user.getCurrentStroke()
         }))
         console.log("1: dispatched startStroke", user.getCurrentStroke());
-        // ctx.strokeStyle = user.getColor();
-        // ctx.lineWidth = user.getBrushSize();
-        // ctx.beginPath();
-        // ctx.moveTo(e.offsetX, e.offsetY);
+        
     })
 
     canvas.addEventListener("mousemove", (e) =>{
         if(!drawing) return;
 
-        user.addPoints({ x: e.offsetX, y: e.offsetY });
+        const {x, y} = getMouseCoords(e);
+
+        user.addPoints({ x: x, y: y });
         continueDrawing(user.getPoints(),ctx);
 
         window.dispatchEvent(new CustomEvent("updateStroke", {
-            detail: {x: e.offsetX, y: e.offsetY}
+            detail: {x: x, y: y}
         }))
         
 
@@ -46,7 +47,7 @@ export function commandHandler(user, canvas, ctx) {
     })
 
     //stop drawing
-    canvas.addEventListener("mouseup", (e) => {
+    canvas.addEventListener("mouseup", () => {
         if(!drawing) return;
         drawing = false;
 
@@ -57,7 +58,7 @@ export function commandHandler(user, canvas, ctx) {
        
 
     })
-     canvas.addEventListener( "mouseleave", (e) => {
+     canvas.addEventListener( "mouseleave", () => {
         if(!drawing) return;
         drawing = false;
 
@@ -67,4 +68,29 @@ export function commandHandler(user, canvas, ctx) {
         window.dispatchEvent(new CustomEvent("endStroke"));
     })
 
+    //Undo and Redo Functions
+    document.addEventListener("keydown", function(event){
+        const isShortcut = event.ctrlKey || event.metaKey;
+        
+        if (isShortcut && event.key ==='z'){
+            // event.preventDefault();
+            console.log("Undooooo");
+        }
+    })
+
+    document.addEventListener("keydown", function(event){
+        const isShortcut = event.ctrlKey || event.metaKey;
+        
+        if (isShortcut && event.key ==='y'){
+            // event.preventDefault();
+            console.log("Redooo");
+        }
+    })
+
+    function getMouseCoords(e){
+        return{
+            x: (e.offsetX )*(canvas.width / canvas.clientWidth),
+            y: (e.offsetY)*(canvas.height / canvas.clientHeight),
+        }
+    }
 }

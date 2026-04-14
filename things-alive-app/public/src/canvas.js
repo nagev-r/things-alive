@@ -5,8 +5,8 @@ export function createCanvas(){
     const ctx = canvas.getContext("2d");
 
     //setting pixel size of canvas and brush style basic implementation
-    canvas.width = 700;
-    canvas.height = 500;
+    canvas.width = 900;
+    canvas.height = 585;
     ctx.fillStyle = "white";
     ctx.fillRect(0,0, canvas.width, canvas.height); 
 

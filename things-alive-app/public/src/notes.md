@@ -16,3 +16,11 @@ For now, I've reasoned that storing this info in the User class would be a decen
 
 *4/5/26*
 
+*4/11/26*
+Spatial Optimazation - Grid Index vs. Quadtree
+CDRT 
+Looking at Examples - Drawpile: utilizes command based architecture where every action is seralized and boradcast to everyone.
+    Layer system where each user has their own layer and can only affect their own actions
+
+Vector storage instead of point arrays — your strokes are currently arrays of raw mouse coordinates. Simplifying them with a curve fitting algorithm like Ramer-Douglas-Peucker reduces the number of points needed to represent a stroke without visible quality loss. Fewer points means less memory, faster redraws, smaller payloads over the socket. This is a pure improvement with no architectural change.
+

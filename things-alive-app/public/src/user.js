@@ -18,6 +18,10 @@ export class User {
     }
 
     
+    getUserId(){
+        return this.userId;
+    }
+
     setCurrentStroke(currentStroke){
         this.drawingHistory.currentStroke = currentStroke;
     }

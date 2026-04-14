@@ -30,7 +30,7 @@ export function initSocket(ctx){
     socket.on("startStroke", (stroke) => {
         //draw remote user's stroke 
         console.log("3: received remote strokeStart", stroke);
-         beginDrawing(stroke, ctx);
+        beginDrawing(stroke, ctx);
         
     })
 
