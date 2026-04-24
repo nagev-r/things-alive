@@ -8,40 +8,45 @@
     <link rel="stylesheet" href="./src/main-style.css">
     <link rel="stylesheet" href="./src/animations.css">
   </head>
+
   <body>
-
     <!--Main App-->
-    <div id="app">
-      <div class ="app-shell">
+    <main>
         
-        <!-- replace w/logo -->
+      <!-- replace w/logo -->
+      <nav class="nav">
+        <div class = "nav-links">
+            <a href="/"> Home </a>
+            <a> About </a>
+            <a> More </a>
+        </div>
+      </nav>
 
-        <nav class="nav">
-          <div class = "nav-links">
-              <a> Home </a>
-              <a> About </a>
-              <a> More </a>
-          </div>
-        </nav>
 
+      <!--WORKSPACE:Canvas and Toolbar-->
+      <div id="workspace-wrapper">
         <section id="workspace-container">
-          
-            <canvas id= "canvasLayout"></canvas>
-            
-              <div class="toolbar">
-                <button id="pen" class ="tool" data-tool = "pen">1</button>
-                <button id="brush" class ="tool" data-tool = "brush">2</button>
-                <button id="marker" class ="tool" data-tool = "marker">3</button>
-                <button id="eraser" class ="tool" data-tool = "eraser">4</button>
-                <!--tools go here-->
-              </div>
-            
-          
-          
+          <canvas id= "canvas"></canvas>
+            <div class="toolbar">
+              <button id="pen" class ="tool" data-tool = "pen">pen</button>
+              <button id="brush" class ="tool" data-tool = "brush">brush</button>
+              <button id="marker" class ="tool" data-tool = "marker">marker</button>
+              <button id="eraser" class ="tool" data-tool = "eraser">eraser</button>
+              <!--tools go here-->
+            </div>     
+   
         </section>
-        <!-- <div class = "footer"></div> -->
       </div>
-    </div>
+    </main>
+
+
+    <!--Site Footer-->
+    <footer> 
+        <p> This is made by 0rchideye >.> </p>
+    </footer>
+    <div class = "unsupported-warning">Sorry!! See more on desktop </div>
+
+    <!-- Script imports-->
     <script src ="/socket.io/socket.io.js"></script>
     <script type="module" src="./src/main.js"></script>
   </body>
