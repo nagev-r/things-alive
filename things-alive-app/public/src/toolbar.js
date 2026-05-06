@@ -4,22 +4,22 @@ import {TOOLS} from "./tools.js";
 export function initToolbar(user){
     const buttons = document.querySelectorAll(".tool");
 
-    buttons.forEach(element => {
-        element.addEventListener("click", () => {
-            const toolName = element.dataset.tool;
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            const toolName = button.dataset.tool;
             const toolConfig = TOOLS[toolName];
 
             // update user action state
             user.setTool(toolName);
             user.setBrushSize(toolConfig.size);
             user.setColor(toolConfig.color);
+
+            
+            buttons.forEach(b => b.classList.remove("active"));
+            button.classList.add("active");
     
 
-            //   // optional: update canvas ctx immediately if needed
-            //   ctx.lineWidth = toolConfig.size;
-            //   ctx.strokeStyle = toolConfig.color;
-            //   ctx.lineCap = toolConfig.lineCap;
-            //   ctx.lineJoin = toolConfig.lineJoin;
+          
         })
     });
 

@@ -12,37 +12,64 @@
   <body>
     <!--Main App-->
     <main>
-        
-      <!-- replace w/logo -->
-      <nav class="nav">
-        <div class = "nav-links">
-            <a href="/"> Home </a>
-            <a> About </a>
-            <a> More </a>
+      <div id="sidebar">
+        <nav id= "main-panel" class = "panel" aria-label=" main navigation panel">
+          <div class="spacer"></div><!-- replace w/logo or animated head -->
+          <h1>Things Alive</h1><!-- replace drawn title-->    
+          <div class="section-container">
+            <div class="section-container">
+              <button id="create-session"> Create Room </button>
+              <button id="join-session">Join Room </button>
+            </div>
+            <button class="main-btn" data-target="about-panel">About</button>
+            <button class="main-btn" data-target="help-panel">Help</button>
+            <button class="main-btn" data-target="settings-panel">Settings</button> 
+            </div>
+           
+    
+        </nav>
+        <div id="about-panel" class = "panel hidden" aria-label="about panel">
+          <button class = "back-btn"> ← Back </button>
+          <p>This is the about panel of the program. </p>
         </div>
-      </nav>
+        <div id="help-panel" class = "panel hidden" aria-label="help panel">
+          <button class = "back-btn"> ← Back </button>
+          <p> This is the help...more...more info. </p>
+        </div>
+        <div id="settings-panel" class = "panel hidden" aria-label="settings panel">
+          <button class = "back-btn"> ← Back </button>
+          <p> Settings panel for the canvsas. Mainly for solo but when joined in a room host has perms only. </p>
+        </div>
+      </div>
 
 
       <!--WORKSPACE:Canvas and Toolbar-->
       <div id="workspace-wrapper">
         <section id="workspace-container">
           <canvas id= "canvas"></canvas>
-            <div class="toolbar">
-              <button id="pen" class ="tool" data-tool = "pen">pen</button>
-              <button id="brush" class ="tool" data-tool = "brush">brush</button>
-              <button id="marker" class ="tool" data-tool = "marker">marker</button>
-              <button id="eraser" class ="tool" data-tool = "eraser">eraser</button>
+            <div id="toolbar">
+              <!--Placeholder for handmade icons-->
+              <button id="pen" class ="tool" data-tool = "pen">✏️</button>
+              <button id="brush" class ="tool" data-tool = "brush">🖌️</button>
+              <button id="marker" class ="tool" data-tool = "marker">🖊️</button>
+              <button id="eraser" class ="tool" data-tool = "eraser">⬜</button>
               <!--tools go here-->
             </div>     
    
         </section>
+      </div>
+      <div id="create-card" class="card hidden">
+        <p> Create room key! </p>
+      </div>
+      <div id="join-card" class="card hidden">
+        <p> Join with room key!</p>
       </div>
     </main>
 
 
     <!--Site Footer-->
     <footer> 
-        <p> This is made by 0rchideye >.> </p>
+        <p> This was made by 0rchideye! >.> </p>
     </footer>
     <div class = "unsupported-warning">Sorry!! See more on desktop </div>
 

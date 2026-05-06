@@ -8,8 +8,16 @@ export function beginDrawing(stroke, ctx){
 
 export function continueDrawing (points, ctx){
     ctx.lineTo(points.x, points.y);
-    ctx.stroke()
+    ctx.stroke();
 
 }
-    //add more
-    //render all strokes so it can be sent to via socket, undo, redo, clear
+
+//add more
+//render all strokes so it can be sent to via socket, undo, redo, clear
+export function renderUndo (stroke){
+
+}
+
+export function renderRedo (stroke){
+
+}

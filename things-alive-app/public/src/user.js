@@ -6,7 +6,8 @@ export class User {
         this.userId = userId;
         this.drawingHistory = { //drawingHistory is an object with the array of the strokes prev done and the currentStroke
             currentStroke: null,
-            strokes: []            
+            strokes: [],
+            redoStack: []            
          } 
 
         this.actionState = { //an object of the default state of user, starts on the pen tool
@@ -45,9 +46,13 @@ export class User {
         return this.drawingHistory.strokes;
     }
     undoStroke(){
-        this.drawingHistory.strokes.pop();
+        let latest = this.drawingHistory.strokes.pop();
+        this.drawingHistory.redoStack.push(latest); 
+        return latest;
     }
-
+    redoStroke(){
+        return this.drawingHistory.redoStack.pop();
+    }
 
     setColor(currentColor){
         this.actionState.currentColor = currentColor;

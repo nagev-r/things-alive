@@ -1,4 +1,4 @@
-import { beginDrawing, continueDrawing } from "./renderer.js";
+import { beginDrawing, continueDrawing, renderUndo } from "./renderer.js";
 
 
 //need to add undo, redo, and a clear
@@ -75,6 +75,8 @@ export function commandHandler(user, canvas, ctx) {
         if (isShortcut && event.key ==='z'){
             // event.preventDefault();
             console.log("Undooooo");
+            renderUndo(user.undoStroke());
+            console.log(user.getStrokes());
         }
     })
 
@@ -84,6 +86,7 @@ export function commandHandler(user, canvas, ctx) {
         if (isShortcut && event.key ==='y'){
             // event.preventDefault();
             console.log("Redooo");
+            console.log(user.redoStroke())
         }
     })
 

@@ -12,7 +12,7 @@ io.on("connection", (socket) => {
     socket.join("default-room");
     socket.on("startStroke", (stroke) => {
         // listening for any client data to broadcast to everyone
-        console.log("4: server received strokeStart from ", socket.id);
+        // console.log("4: server received strokeStart from ", socket.id);
         socket.to("default-room").emit("startStroke", stroke);
     })
 
