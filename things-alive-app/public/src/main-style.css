@@ -9,7 +9,7 @@
 }
 
 .spacer {
-  flex-shrink: 0;
+  /* flex-shrink: 0; */
   width: 100px;
   height: 150px;
 }
@@ -43,7 +43,9 @@ footer {
   display: flex;
   justify-content: center;
   text-align: center;
+  align-items: center;
   background-color: #f7fccfff;
+  height: 5vh;
 }
 
 h1 {
@@ -56,7 +58,6 @@ main h1 {
   text-align: center;
   margin: 0;
   margin-bottom: 20px;
-  flex-shrink: 1;
   color: var(--accent-blue);
 }
 
@@ -67,7 +68,6 @@ p{
 
 #sidebar {
   flex: 0 0 22vw;
-  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -101,6 +101,43 @@ p{
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+}
+
+
+#toolbar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  border: 1.8px solid #0052ddff;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  margin-right: 15px;
+  min-width: 50px;  /* prevents collapse */
+
+}
+
+.tool {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background-color: transparent;
+  
+}
+
+.tool.active {
+  background-color: #dddfe4;
+}
+
+.tool:hover {
+  text-decoration: none;
+  background-color: #dddfe4 ;
 }
 
 #workspace-wrapper {
@@ -180,7 +217,7 @@ p{
 button {
   border-radius: 100px;
   border: 1px solid transparent;
-  padding: 0.25em 0.25em;
+  padding: 0.35em 0.45em;
   min-width:0;
   max-width: fit-content;
   font-size: 1em;
@@ -203,14 +240,37 @@ button:focus-visible { outline: 4px auto -webkit-focus-ring-color; } */
   
 } */
 
+.session-btn{
+  border: 1px dotted black;
+  border-radius: 100px;
+}
+
+.session-btn:hover {
+  text-decoration: none;
+  background-color: #f7f32e ;
+  border-style: solid;
+}
+
 .card {
-  position: absolute;
-  inset: 0;
-  height: 500px;
-  width: 300px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 350px;
+  transform: translate(-50%, -50%);
+  max-width: 75vw;
+  max-height: 80vh;
   background-color: white;
+  overflow-y: auto;
   z-index:10;
-  border: 1px dotted var(--accent-blue);
+  padding: 1rem;
+  border: 3px dotted var(--accent-blue);
+}
+
+.card-backdrop {
+  position: fixed;
+  inset: 0;              
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9;         
 }
 
 .card.hidden {
@@ -218,47 +278,17 @@ button:focus-visible { outline: 4px auto -webkit-focus-ring-color; } */
   pointer-events: none;
 }
 
+.key-container{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
 /* #pen    { background-color: rgba(0, 81, 221, 0); }
 #brush  { background-color: rgba(0, 81, 221, 0); }
 #marker { background-color: rgba(0, 81, 221, 0); }
 #eraser { background-color: rgba(0, 81, 221, 0); } */
 
-
-#toolbar {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-  border: 1.8px solid #0052ddff;
-  background-color: rgb(255, 255, 255);
-  padding: 10px;
-  margin-right: 15px;
-  min-width: 50px;  /* prevents collapse */
-
-}
-
-.tool {
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  background-color: transparent;
-  
-}
-
-.tool.active {
-  background-color: #dddfe4;
-}
-
-.tool:hover {
-  text-decoration: none;
-  background-color: #dddfe4 ;
-}
 
 /* Small screen gate */
 .unsupported-warning {

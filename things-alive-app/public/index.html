@@ -18,8 +18,8 @@
           <h1>Things Alive</h1><!-- replace drawn title-->    
           <div class="section-container">
             <div class="section-container">
-              <button id="create-session"> Create Room </button>
-              <button id="join-session">Join Room </button>
+              <button id="create-session" class="session-btn"> Create Room </button>
+              <button id="join-session" class="session-btn">Join Room </button>
             </div>
             <button class="main-btn" data-target="about-panel">About</button>
             <button class="main-btn" data-target="help-panel">Help</button>
@@ -34,11 +34,11 @@
         </div>
         <div id="help-panel" class = "panel hidden" aria-label="help panel">
           <button class = "back-btn"> ← Back </button>
-          <p> This is the help...more...more info. </p>
+          <p> This is the help...for more...more info. </p>
         </div>
         <div id="settings-panel" class = "panel hidden" aria-label="settings panel">
           <button class = "back-btn"> ← Back </button>
-          <p> Settings panel for the canvsas. Mainly for solo but when joined in a room host has perms only. </p>
+          <p> Settings panel for the canvas. Mainly for solo but when joined in a room host has perms only. </p>
         </div>
       </div>
 
@@ -59,10 +59,22 @@
         </section>
       </div>
       <div id="create-card" class="card hidden">
-        <p> Create room key! </p>
+        <button class="exit-btn"> X </button>
+        <p> Here's your generated room key! </p>
+        <div class="key-container">
+          <p id="gen-key">12345</p> <!--change into maybe not p? need to be abe to get data in via js-->
+          <button id="copy-btn" class="session-btn"> Copy </button> 
+        </div>
+        
       </div>
       <div id="join-card" class="card hidden">
-        <p> Join with room key!</p>
+        <button class="exit-btn"> X </button>
+        <p> Join with room key!</p> 
+        <div class="key-container">
+          <p> _ _ _ _ _</p> <!--random placeholder-->
+          <button id="enter-btn" class="session-btn"> Enter </button>
+        </div>
+        
       </div>
     </main>
 

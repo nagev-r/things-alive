@@ -12,5 +12,7 @@ export function setupWorkspace(){
     initToolbar(user);
     commandHandler(user, canvas, ctx); //default canvas is then sent for input usage
     initSocket(ctx);
+
+    
 }
 

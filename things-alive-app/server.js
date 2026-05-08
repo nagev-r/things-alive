@@ -6,7 +6,7 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer);
 
-app.use(express.static("public")); //express used to serve the hmtl and src files
+app.use(express.static("public")); //pers notes: express used to serve the hmtl and src files
 
 io.on("connection", (socket) => {
     socket.join("default-room");
