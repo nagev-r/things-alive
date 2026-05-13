@@ -2,8 +2,10 @@
  * so that users don't affect eachother while drawing */
 
 export class User {
-    constructor(userId){
-        this.userId = userId;
+    constructor(){
+        this.userId = null;
+        this.room = null;
+        this.isHost = false;
         this.drawingHistory = { //drawingHistory is an object with the array of the strokes prev done and the currentStroke
             currentStroke: null,
             strokes: [],

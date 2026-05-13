@@ -1,6 +1,6 @@
 import {beginDrawing, continueDrawing} from "./renderer.js";
 
-export function initSocket(ctx){
+export function initSocket(user, ctx){
     const socket = io();
 
     socket.on("connect", () =>{
@@ -11,7 +11,18 @@ export function initSocket(ctx){
         console.log("connection error", err.message);
     })
 
-    // listen for the local drawing history from inputHandler, broadcast out
+    socket.on("init-user", (data) =>{
+        console.log("user init: ", data.id );
+        user.id = data.id;
+
+    })
+
+    //-----outgoing-----//
+    window.addEventListener("createRoom", () => {
+        socket.emit("createRoom");
+    })
+
+    // listen for the local drawing history from inputHandler, broadcast outgoing
     window.addEventListener("startStroke", (e) => {
         console.log("2: socket heard startStroke", e.detail);
         socket.emit("startStroke", e.detail);

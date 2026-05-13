@@ -9,15 +9,23 @@ const io = new Server(httpServer);
 app.use(express.static("public")); //pers notes: express used to serve the hmtl and src files
 
 io.on("connection", (socket) => {
-    socket.join("default-room");
+    // socket.join("default-room");
+    socket.emit("init-user", {
+        id: socket.id
+    })
+    
+    socket.on("createRoom", (stroke) => {
+
+    })
+
     socket.on("startStroke", (stroke) => {
         // listening for any client data to broadcast to everyone
         // console.log("4: server received strokeStart from ", socket.id);
-        socket.to("default-room").emit("startStroke", stroke);
+        // socket.to("default-room").emit("startStroke", stroke);
     })
 
     socket.on("updateStroke", (points) => {
-        socket.to("default-room").emit("updateStroke", points);
+        // socket.to("default-room").emit("updateStroke", points);
     })
 
     socket.on("endStroke", () => {

@@ -259,7 +259,7 @@ button:focus-visible { outline: 4px auto -webkit-focus-ring-color; } */
   transform: translate(-50%, -50%);
   max-width: 75vw;
   max-height: 80vh;
-  background-color: white;
+  background-color: var(--bg-color);
   overflow-y: auto;
   z-index:10;
   padding: 1rem;

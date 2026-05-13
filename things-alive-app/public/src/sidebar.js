@@ -5,6 +5,8 @@ export function setupSidebar() {
 
     createRoomBtn.addEventListener('click', () => {
         document.getElementById('create-card').classList.toggle('hidden');
+
+        window.dispatchEvent(new CustomEvent("createRoom"));
     })
 
     joinRoomBtn.addEventListener('click', () => {

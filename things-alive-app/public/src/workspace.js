@@ -6,12 +6,12 @@ import {initSocket} from "./socket.js";
 
 export function setupWorkspace(){
     const userId = crypto.randomUUID();
-    const user = new User(userId); //new user on new workspace setup, future needs random gen
+    const user = new User; //new user on new workspace setup, future needs random gen
     
     const {canvas, ctx} = createCanvas(); 
     initToolbar(user);
     commandHandler(user, canvas, ctx); //default canvas is then sent for input usage
-    initSocket(ctx);
+    initSocket(user, ctx);
 
     
 }
