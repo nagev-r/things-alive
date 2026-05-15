@@ -20,6 +20,8 @@
             <div class="section-container">
               <button id="create-session" class="session-btn"> Create Room </button>
               <button id="join-session" class="session-btn">Join Room </button>
+              <button id="invite-session" class="session-btn hidden"> Invite </button>
+              <button id="leave-session" class="session-btn hidden"> Leave Room </button>
             </div>
             <button class="main-btn" data-target="about-panel">About</button>
             <button class="main-btn" data-target="help-panel">Help</button>
@@ -58,24 +60,28 @@
    
         </section>
       </div>
-      <div id="create-card" class="card hidden">
-        <button class="exit-btn"> X </button>
-        <p> Here's your generated room key! </p>
-        <div class="key-container">
-          <p id="gen-key">12345</p> <!--change into maybe not p? need to be abe to get data in via js-->
-          <button id="copy-btn" class="session-btn"> Copy </button> 
+
+      <div id="card-backdrop" class= "hidden">
+        <div id="create-card" class="card hidden">
+          <button class="exit-btn"> X </button>
+          <p> Room created! Copy your key to invite friends: </p>
+          <div class="key-container">
+            <p id="room-key">12345</p> <!--change into maybe not <p>? -->
+            <button id="copy-btn" class="session-btn"> Copy </button> 
+          </div>
         </div>
-        
-      </div>
-      <div id="join-card" class="card hidden">
-        <button class="exit-btn"> X </button>
-        <p> Join with room key!</p> 
-        <div class="key-container">
-          <p> _ _ _ _ _</p> <!--random placeholder-->
-          <button id="enter-btn" class="session-btn"> Enter </button>
+
+        <div id="join-card" class="card hidden">
+          <button class="exit-btn"> X </button>
+          <p> Join with room key!</p> 
+          <div class="key-container">
+            <input id="key-input" type="text" placeholder="Enter Room Code" maxlength="6" autocomplete="off" />
+            <button id="enter-btn" class="session-btn"> Enter </button>
+          </div>
         </div>
-        
+
       </div>
+
     </main>
 
 

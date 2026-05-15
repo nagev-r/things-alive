@@ -266,17 +266,22 @@ button:focus-visible { outline: 4px auto -webkit-focus-ring-color; } */
   border: 3px dotted var(--accent-blue);
 }
 
-.card-backdrop {
+#card-backdrop {
   position: fixed;
   inset: 0;              
   background: rgba(0, 0, 0, 0.4);
   z-index: 9;         
 }
 
-.card.hidden {
+.hidden {
   display:none;
   pointer-events: none;
 }
+/* 
+.card.hidden {
+  display:none;
+  pointer-events: none;
+} */
 
 .key-container{
   display: flex;

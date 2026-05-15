@@ -1,4 +1,5 @@
 import {beginDrawing, continueDrawing} from "./renderer.js";
+import {showCreateCard, updateUI} from "./ui.js";
 
 export function initSocket(user, ctx){
     const socket = io();
@@ -11,7 +12,7 @@ export function initSocket(user, ctx){
         console.log("connection error", err.message);
     })
 
-    socket.on("init-user", (data) =>{
+    socket.on("initUser", (data) =>{
         console.log("user init: ", data.id );
         user.id = data.id;
 
@@ -19,7 +20,31 @@ export function initSocket(user, ctx){
 
     //-----outgoing-----//
     window.addEventListener("createRoom", () => {
-        socket.emit("createRoom");
+        socket.emit("createRoom", (res) => {
+            if(!res.ok){
+                console.log(res.error)
+                return;
+            }
+            console.log("Room created successfully")
+            showCreateCard(res.roomId);
+            user.isHost = true;
+            updateUI(user.isHost);
+
+        })
+    })
+
+    window.addEventListener("joinRoom", (e) => {
+        
+        console.log("client says code", e.detail);
+        socket.emit("joinRoom", e.detail, (res) => {
+            
+
+            if(!res.ok){
+                console.log(res.error)
+                return;
+            }
+            updateUI(user.isHost);
+        })
     })
 
     // listen for the local drawing history from inputHandler, broadcast outgoing
@@ -38,6 +63,11 @@ export function initSocket(user, ctx){
 
 
     //---incoming--- remote history coming from server, draw on local
+    // socket.on("roomCreated", (room) => {
+    //     showCreateCard(room.id);
+    //     user.isHost = true;
+    // })
+
     socket.on("startStroke", (stroke) => {
         //draw remote user's stroke 
         console.log("3: received remote strokeStart", stroke);

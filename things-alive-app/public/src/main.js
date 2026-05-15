@@ -1,8 +1,8 @@
-import {setupSidebar} from "./sidebar.js";
+import {setupUI} from "./ui.js";
 import { setupWorkspace } from "./workspace.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    setupSidebar();
+    setupUI();
     setupWorkspace();
 });
 
