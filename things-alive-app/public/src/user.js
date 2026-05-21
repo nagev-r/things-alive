@@ -3,6 +3,7 @@
 
 export class User {
     constructor(){
+        this.room = null;
         this.userId = null;
         this.isHost = false;
         this.drawingHistory = { //drawingHistory is an object with the array of the strokes prev done and the currentStroke
