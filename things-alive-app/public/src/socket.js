@@ -43,6 +43,7 @@ export function initSocket(user, ctx){
                 console.log(res.error)
                 return;
             }
+            user.isHost = res.isHost;
             user.room = e.detail;
             updateUI(user.isHost, user.room);
             

@@ -3,23 +3,24 @@ const joinRoomBtn = document.getElementById('join-session');
 const inviteBtn = document.getElementById('invite-session');
 const leaveRoomBtn = document.getElementById('leave-session');
 
-export function showCopyMsg(msg){
-    const subtext = document.getElementById('copy-subtext');
+export function showToast(msg){
+    const toast = document.getElementById('toast');
 
-    subtext.textContent = msg;
-    subtext.classList.remove('hidden');
+    toast.textContent = msg;
+    toast.classList.remove('hidden');
 
     setTimeout(() =>{
-        subtext.classList.add('hidden');
+        toast.classList.add('hidden');
     }, 2000)
 }
+
 
 export async function copyToClipboard(roomCode){
     try{
         await navigator.clipboard.writeText(roomCode);
-        showCopyMsg('Copied to clipboard!');
+        showToast('Room key copied to clipboard!');
     }catch(err){
-        showCopyMsg('Could not copy to clipboard');
+        showToast('Could not copy key to clipboard');
         console.log('Failed to copy: ', err);
     }
 }
