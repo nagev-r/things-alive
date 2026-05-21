@@ -3,7 +3,6 @@ import { beginDrawing, continueDrawing, renderUndo } from "./renderer.js";
 
 //need to add undo, redo, and a clear
 export function commandHandler(user, canvas, ctx) {
-    console.log("command handler called");
     let drawing = false;
     canvas.addEventListener("mousedown", (e) => {
         drawing = true;

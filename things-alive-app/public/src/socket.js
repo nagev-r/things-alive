@@ -1,11 +1,11 @@
 import {beginDrawing, continueDrawing} from "./renderer.js";
-import {showCreateCard, updateUI} from "./ui.js";
+import {copyToClipboard, showCreateCard, updateUI} from "./ui.js";
 
 export function initSocket(user, ctx){
     const socket = io();
 
     socket.on("connect", () =>{
-        console.log("connected to server", socket.id);
+        // console.log("connected to server", socket.id);
     })
 
     socket.on("connect_error", (err) =>{
@@ -26,8 +26,9 @@ export function initSocket(user, ctx){
                 return;
             }
             console.log("Room created successfully")
-            showCreateCard(res.roomId);
             user.isHost = true;
+            user.room = res.roomId;
+            showCreateCard(res.roomId);
             updateUI(user.isHost);
 
         })
@@ -37,24 +38,43 @@ export function initSocket(user, ctx){
         
         console.log("client says code", e.detail);
         socket.emit("joinRoom", e.detail, (res) => {
-            
 
             if(!res.ok){
                 console.log(res.error)
                 return;
             }
-            updateUI(user.isHost);
+            user.room = e.detail;
+            updateUI(user.isHost, user.room);
+            
         })
+    })
+
+    window.addEventListener("leaveRoom", () => {
+        socket.emit("leaveRoom", user.room, (res) => {
+            if(!res.ok){
+                console.log(res.error)
+                return;
+            }
+            console.log("Left room");
+            user.isHost = false;
+            user.room = null;
+            updateUI(user.isHost, user.room);
+
+        })
+    })
+
+    window.addEventListener("inviteCode", async () => {
+        return copyToClipboard(user.room);
     })
 
     // listen for the local drawing history from inputHandler, broadcast outgoing
     window.addEventListener("startStroke", (e) => {
         console.log("2: socket heard startStroke", e.detail);
-        socket.emit("startStroke", e.detail);
+        socket.emit("startStroke", e.detail, user.room);
     })
 
     window.addEventListener("updateStroke", (e) => {
-        socket.emit("updateStroke", e.detail);
+        socket.emit("updateStroke", e.detail, user.room);
     })
 
     window.addEventListener("endStroke", () => {

@@ -17,9 +17,32 @@ io.on("connection", (socket) => {
         id: socket.id
     })
 
+
+    socket.on("leaveRoom", (room, callback) => {
+        try{
+            console.log("room user is leaving...", room );
+            socket.leave(room);
+            callback({ ok: true })
+        } catch (err){
+            callback({ ok: false, error: "problem joining server"})
+        }
+    })
+
     socket.on("joinRoom", (inputVal, callback) => {
         try{
-            console.log(inputVal); //just to test
+            console.log("server says: ", inputVal);
+            const validKey = /^[A-Z0-9]{6}$/.test(inputVal);            
+
+            if(validKey){
+                const roomExists = activeRooms.has(inputVal);
+                if(roomExists){
+                  console.log("server says room exists");
+                    socket.join(inputVal);
+                    callback({ ok: true, inputVal})  
+                }else{ callback ({ ok: false, error: "Invalid Room Key"})}
+            }else{
+                callback ({ ok: false, error: "Invalid Room Key"})
+            }
         } catch (err){
             callback({ ok: false, error: "problem joining server"})
         }
@@ -39,6 +62,9 @@ io.on("connection", (socket) => {
 
             socket.join(roomId);
             activeRooms.set(roomId, room); //set in the map BUT NEED TO CHECK IF HOST ALR IN ROOM
+            if(activeRooms.has(roomId)){
+                console.log("the room is in");
+            }
 
             callback({ok: true, roomId})
 
@@ -50,14 +76,14 @@ io.on("connection", (socket) => {
         
     })
 
-    socket.on("startStroke", (stroke) => {
+    socket.on("startStroke", (stroke, room) => {
         // listening for any client data to broadcast to everyone
         // console.log("4: server received strokeStart from ", socket.id);
-        // socket.to("default-room").emit("startStroke", stroke);
+        socket.to(room).emit("startStroke", stroke);
     })
 
-    socket.on("updateStroke", (points) => {
-        // socket.to("default-room").emit("updateStroke", points);
+    socket.on("updateStroke", (points, room) => {
+        socket.to(room).emit("updateStroke", points);
     })
 
     socket.on("endStroke", () => {

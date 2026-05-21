@@ -1,23 +1,52 @@
 const createRoomBtn = document.getElementById('create-session');
 const joinRoomBtn = document.getElementById('join-session');
+const inviteBtn = document.getElementById('invite-session');
+const leaveRoomBtn = document.getElementById('leave-session');
 
+export function showCopyMsg(msg){
+    const subtext = document.getElementById('copy-subtext');
 
-export function updateUI(user){
+    subtext.textContent = msg;
+    subtext.classList.remove('hidden');
+
+    setTimeout(() =>{
+        subtext.classList.add('hidden');
+    }, 2000)
+}
+
+export async function copyToClipboard(roomCode){
+    try{
+        await navigator.clipboard.writeText(roomCode);
+        showCopyMsg('Copied to clipboard!');
+    }catch(err){
+        showCopyMsg('Could not copy to clipboard');
+        console.log('Failed to copy: ', err);
+    }
+}
+
+export function updateUI(userIsHost, userRoom){
     const inviteBtn = document.getElementById('invite-session');
     const leaveBtn = document.getElementById('leave-session');
 
-    if(!user.isHost){
+    if(userIsHost){ //maybe there's a better way of doing this lol, switch stmnt?
         createRoomBtn.classList.add('hidden');
         joinRoomBtn.classList.add('hidden');
 
         inviteBtn.classList.remove('hidden');
         leaveBtn.classList.remove('hidden');
 
-    } else {
+    } else if (!userIsHost && userRoom) {
         createRoomBtn.classList.add('hidden');
         joinRoomBtn.classList.add('hidden');
 
+        inviteBtn.classList.add('hidden');
         leaveBtn.classList.remove('hidden');
+    } else{
+        createRoomBtn.classList.remove('hidden');
+        joinRoomBtn.classList.remove('hidden');
+
+        inviteBtn.classList.add('hidden');
+        leaveBtn.classList.add('hidden');
     }
 }
 
@@ -31,6 +60,7 @@ export function showCreateCard(roomId){
 
 export function setupUI() {
     const cardBackdrop = document.getElementById('card-backdrop');
+    const copyCodeBtn = document.getElementById('copy-btn');
 
     const exitBtns = document.querySelectorAll('.exit-btn');
     exitBtns.forEach(btn => {
@@ -39,6 +69,10 @@ export function setupUI() {
             cardBackdrop.classList.add('hidden');
         });
     });
+
+    leaveRoomBtn.addEventListener('click', () => {
+        window.dispatchEvent(new CustomEvent("leaveRoom"));
+    })
     
     createRoomBtn.addEventListener('click', () => {
         window.dispatchEvent(new CustomEvent("createRoom"));
@@ -52,10 +86,20 @@ export function setupUI() {
   
     })
 
+    inviteBtn.addEventListener('click', async () =>{
+        window.dispatchEvent(new CustomEvent("inviteCode"));
+    })
+
+    copyCodeBtn.addEventListener('click', async () =>{
+        window.dispatchEvent(new CustomEvent("inviteCode"));
+    })
+
+    //JOIN INPUT
     const enterBtn = document.getElementById('enter-btn');
     const keyInput = document.getElementById('key-input');
-    const inputVal = keyInput.textContent; //for some reason empty string!
+    
     enterBtn.addEventListener('click', () => {
+        const inputVal = keyInput.value; 
         console.log("b:", inputVal);
         const chkdInputVal = inputVal.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
         console.log("a:", chkdInputVal);
@@ -64,6 +108,7 @@ export function setupUI() {
         }));
     })
 
+    //NAV BUTTONS
     const navBtns = document.querySelectorAll('[data-target]');
     navBtns.forEach(button => {
         button.addEventListener('click', () => {
