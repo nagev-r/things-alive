@@ -25,7 +25,7 @@ export async function copyToClipboard(roomCode){
     }
 }
 
-export function updateUI(userIsHost, userRoom){
+export function updateUI(userIsHost, userInRoom){
     const inviteBtn = document.getElementById('invite-session');
     const leaveBtn = document.getElementById('leave-session');
 
@@ -36,7 +36,9 @@ export function updateUI(userIsHost, userRoom){
         inviteBtn.classList.remove('hidden');
         leaveBtn.classList.remove('hidden');
 
-    } else if (!userIsHost && userRoom) {
+
+
+    } else if (!userIsHost && userInRoom) {
         createRoomBtn.classList.add('hidden');
         joinRoomBtn.classList.add('hidden');
 
@@ -49,6 +51,11 @@ export function updateUI(userIsHost, userRoom){
         inviteBtn.classList.add('hidden');
         leaveBtn.classList.add('hidden');
     }
+}
+export function hideJoinCard(){
+    document.getElementById('join-card').classList.add('hidden');
+    document.getElementById('card-backdrop').classList.add('hidden');
+
 }
 
 export function showCreateCard(roomId){
