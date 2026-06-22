@@ -1,5 +1,5 @@
 import {beginDrawing, continueDrawing} from "./renderer.js";
-import {copyToClipboard, showCreateCard, updateUI} from "./ui.js";
+import {copyToClipboard, showCreateCard, hideJoinCard, updateUI, showToast} from "./ui.js";
 
 export function initSocket(user, ctx){
     const socket = io();
@@ -14,7 +14,7 @@ export function initSocket(user, ctx){
 
     socket.on("initUser", (data) =>{
         console.log("user init: ", data.id );
-        user.id = data.id;
+        user.userId = data.id;
 
     })
 
@@ -22,10 +22,10 @@ export function initSocket(user, ctx){
     window.addEventListener("createRoom", () => {
         socket.emit("createRoom", (res) => {
             if(!res.ok){
-                console.log(res.error)
+                showToast(res.error)
                 return;
             }
-            console.log("Room created successfully")
+            showToast("Room created successfully :)")
             user.isHost = true;
             user.room = res.roomId;
             showCreateCard(res.roomId);
@@ -40,11 +40,14 @@ export function initSocket(user, ctx){
         socket.emit("joinRoom", e.detail, (res) => {
 
             if(!res.ok){
-                console.log(res.error)
+                showToast(res.error)
                 return;
             }
             user.isHost = res.isHost;
             user.room = e.detail;
+
+            showToast(`You have joined the room`);
+            hideJoinCard();
             updateUI(user.isHost, user.room);
             
         })
@@ -53,10 +56,12 @@ export function initSocket(user, ctx){
     window.addEventListener("leaveRoom", () => {
         socket.emit("leaveRoom", user.room, (res) => {
             if(!res.ok){
-                console.log(res.error)
+                showToast(res.error)
                 return;
             }
-            console.log("Left room");
+            
+            showToast(`User ${user.userId} has left the room`);
+           
             user.isHost = false;
             user.room = null;
             updateUI(user.isHost, user.room);
@@ -84,10 +89,6 @@ export function initSocket(user, ctx){
 
 
     //---incoming--- remote history coming from server, draw on local
-    // socket.on("roomCreated", (room) => {
-    //     showCreateCard(room.id);
-    //     user.isHost = true;
-    // })
 
     socket.on("startStroke", (stroke) => {
         //draw remote user's stroke 
